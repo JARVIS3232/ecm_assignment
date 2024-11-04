@@ -3,7 +3,9 @@ import axios from "axios";
 
 const fetchProducts = async () => {
   try {
-    const res = await axios.get("http://localhost:3000/api/products");
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`
+    );
     return res.data.products;
   } catch (error) {
     console.log(error);
@@ -11,7 +13,10 @@ const fetchProducts = async () => {
 };
 
 const Home = async () => {
-  const products = await fetchProducts();
+  let products = await fetchProducts();
+  if (!products) {
+    products = [];
+  }
   return (
     <div className="container mx-auto p-6 ">
       <h1 className="text-3xl font-bold text-center my-8">Product Showcase</h1>

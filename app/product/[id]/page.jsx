@@ -3,7 +3,9 @@ import axios from "axios";
 
 async function fetchProduct(id) {
   try {
-    const res = await axios.get(`http://localhost:3000/api/products?ids=${id}`);
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products?ids=${id}`
+    );
     return res.data;
   } catch (error) {
     console.error("Error fetching product:", error);
